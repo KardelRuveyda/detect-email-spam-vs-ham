@@ -1,17 +1,15 @@
 Bu proje, SVM (Support Vector Machine) algoritmasını kullanarak spam e-postalarını filtrelemek için bir uygulama geliştirmeyi amaçlamaktadır. Google Colab ortamında Python programlama dili kullanılarak oluşturulan bu uygulama, TfidfVectorizer ile metin vektörleştirme ve SVC (Support Vector Classification) ile SVM modeli eğitimi sağlamaktadır. Eğitim veri kümesi üzerindeki modelin performansı, test veri kümesiyle değerlendirilerek sınıflandırma raporu elde edilmektedir. Ayrıca, kullanıcıya gerçek zamanlı bir demo sunularak, kullanıcının girdiği metni SVM modeliyle değerlendirerek spam veya normal e-posta olarak sınıflandırmaktadır.
 1.	İlk olarak, gerekli kütüphaneleri import ediyoruz: pandas, train_test_split, TfidfVectorizer, SVC ve classification_report. Bu kütüphaneler, veri işleme, veri kümesi bölme, metin vektörleştirme, SVM modeli ve sınıflandırma raporu gibi işlemler için kullanılır.
 
+**pandas**: Veri işleme ve manipülasyonu için kullanılan bir Python kütüphanesidir. Bu projede, veri setinin yüklenmesi ve kolonlara erişim için pandas kullanılıyor.
+**sklearn.model_selection.train_test_split**: Veri kümesini eğitim ve test alt kümelerine bölmek için kullanılan bir fonksiyondur. Bu sayede, modelin eğitim verileri üzerinde eğitilmesi ve performansının test verileriyle değerlendirilmesi sağlanır.
+**sklearn.feature_extraction.text.TfidfVectorizer**: Metin verilerini sayısal vektörlere dönüştürmek için kullanılan bir sınıftır. TfidfVectorizer, TF-IDF (Term Frequency-Inverse Document Frequency) yöntemini kullanarak metinlerin vektörel temsilini oluşturur. Bu projede, e-posta metinlerinin vektörleştirilmesi için kullanılır.
+**sklearn.svm.SVC**: Support Vector Classification (SVC) algoritmasını uygulayan bir sınıftır. SVM algoritmasını kullanarak sınıflandırma problemlerini çözer. Bu projede, eğitim verileri üzerindeki SVM modelini oluşturmak ve eğitmek için kullanılır.
+**sklearn.metrics.classification_report**: Sınıflandırma modelinin performansını değerlendirmek için kullanılan bir fonksiyondur. Precision, recall, f1-score ve support gibi metrikleri sağlar. Bu projede, modelin sınıflandırma performansını raporlamak için kullanılır.
+![image](https://github.com/KardelRuveyda/detect-email-spam-vs-ham/assets/33912144/d5531ca4-efe5-459f-b18e-195e30a0e7ef)
 
-
-
-pandas: Veri işleme ve manipülasyonu için kullanılan bir Python kütüphanesidir. Bu projede, veri setinin yüklenmesi ve kolonlara erişim için pandas kullanılıyor.
-sklearn.model_selection.train_test_split: Veri kümesini eğitim ve test alt kümelerine bölmek için kullanılan bir fonksiyondur. Bu sayede, modelin eğitim verileri üzerinde eğitilmesi ve performansının test verileriyle değerlendirilmesi sağlanır.
-sklearn.feature_extraction.text.TfidfVectorizer: Metin verilerini sayısal vektörlere dönüştürmek için kullanılan bir sınıftır. TfidfVectorizer, TF-IDF (Term Frequency-Inverse Document Frequency) yöntemini kullanarak metinlerin vektörel temsilini oluşturur. Bu projede, e-posta metinlerinin vektörleştirilmesi için kullanılır.
-sklearn.svm.SVC: Support Vector Classification (SVC) algoritmasını uygulayan bir sınıftır. SVM algoritmasını kullanarak sınıflandırma problemlerini çözer. Bu projede, eğitim verileri üzerindeki SVM modelini oluşturmak ve eğitmek için kullanılır.
-sklearn.metrics.classification_report: Sınıflandırma modelinin performansını değerlendirmek için kullanılan bir fonksiyondur. Precision, recall, f1-score ve support gibi metrikleri sağlar. Bu projede, modelin sınıflandırma performansını raporlamak için kullanılır.
- 
-2.	spam_ham_dataset.csv dosyasını pandas kütüphanesi aracılığıyla yüklüyoruz ve data adlı değişkene atıyoruz. Bu veri kümesi, spam ve normal e-postaların etiketlendiği bir tablo şeklinde olmalıdır.
- 
+2.	**spam_ham_dataset.csv** dosyasını pandas kütüphanesi aracılığıyla yüklüyoruz ve data adlı değişkene atıyoruz. Bu veri kümesi, spam ve normal e-postaların etiketlendiği bir tablo şeklinde olmalıdır.
+ ![image](https://github.com/KardelRuveyda/detect-email-spam-vs-ham/assets/33912144/2eb60e87-37ea-4cdb-b032-22acc0d5556e)
 3.	Veri kümesini özellikler (X) ve hedef değişken (y) olarak ayırıyoruz. text sütununu özellikler olarak, label sütununu ise hedef değişken olarak kullanıyoruz.
  
 4.	Veri kümesini eğitim ve test alt kümelerine bölmek için train_test_split fonksiyonunu kullanıyoruz. Burada, X ve y'yi X_train, X_test, y_train ve y_test olarak böldük. Test veri kümesi, toplam veri kümesinin %20'sini oluşturacak şekilde belirledik.
